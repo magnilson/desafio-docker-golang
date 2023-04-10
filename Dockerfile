@@ -7,8 +7,8 @@ RUN go mod download
 
 COPY main.go ./
 
-RUN go build -o main .
+RUN go build -ldflags "-s -w" main.go
 
-FROM alpine:latest
+FROM scratch
 COPY --from=builder /app/main ./
 CMD ["/main"]
